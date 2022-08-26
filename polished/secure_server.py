@@ -1,20 +1,19 @@
 from shiny import App, render, ui, reactive
 
+from .sign_in_page import sign_in_server
 
 def secure_server(server): 
     
     def fun_out(input, output, session):
-    
-        @reactive.Calc
-        @reactive.event(input.submit_sign_in)
-        def sign_in_r(): 
-            print(server)
-            return input.submit_sign_in()
-    
-        @output
-        @render.text
-        def sign_in_out():
-            return f"hi {sign_in_r()}"
+        
+        # if on sign in page return this
+        out = sign_in_server(input, output, session)
 
+
+        # if on app return the app server
+        # out = server(input, output, server)
+
+        return out
 
     return fun_out
+    

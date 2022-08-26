@@ -17,9 +17,7 @@ app_ui = ui.page_fluid(
     ui.output_text_verbatim("txt")
 )
 
-
-
-def server(input, output, session):
+def app_server(input, output, session):
     
     print(session)
         
@@ -30,6 +28,6 @@ def server(input, output, session):
 
 ui = secure_ui(app_ui)
 
-server = secure_server(server)
+server = secure_server(app_server)
 
 app = App(ui, server)

@@ -1,26 +1,10 @@
-from shiny import App, render, ui, reactive
 import hashlib
+
+from .sign_in_page import sign_in_ui
+from .api_sessions import get_sessions
 
 my_hash = hashlib.md5()
 
-sign_in_ui = ui.page_fluid(
-    ui.h2("Sign In"),
-    ui.input_text(
-        "email",
-        "Email",
-        value = ""
-    ),
-    ui.input_password(
-        "password",
-        "Password",
-        value = ""
-    ),
-    ui.input_action_button(
-        "submit_sign_in",
-        "Sign In"
-    ),
-    ui.output_text_verbatim("sign_in_out")
-)
 
 def secure_ui(ui):
    
@@ -38,7 +22,7 @@ def secure_ui(ui):
                 print("error getting session")
         
         if (polished_user == None):
-            page_out = sign_in_ui
+            page_out = sign_in_ui()
         else:
             page_out = ui
         
