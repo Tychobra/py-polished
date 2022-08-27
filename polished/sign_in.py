@@ -1,18 +1,16 @@
 import requests
-from .polished_config import _polished
+from ._polished import _polished
 
-def get_sessions(app_name, hashed_cookie, api_key = _polished["api_key"]):
+def sign_in(app_uid, email, password, api_key = _polished["api_key"]):
        
     res = requests.post(
-        _polished["api_url"] + "/",
+        _polished["api_url"] + "/sign-in-email",
         params = {
-            "app_name": app_name,
-            "hashed_cookie": hashed_cookie
+            "app_uid": app_uid,
+            "email": email,
+            "password": password
         },
-        auth = {
-            "user": api_key,
-            "password": ""
-        }
+        auth = (api_key, "")
     )
 
     return res.json()

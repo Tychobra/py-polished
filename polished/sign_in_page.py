@@ -1,5 +1,8 @@
 from shiny import *
 
+from ._polished import _polished
+from .sign_in import sign_in
+
 def sign_in_ui():
     
     out = ui.page_fluid(
@@ -31,7 +34,7 @@ def sign_in_server(input, output, session):
         hold_password = input.password()
 
         try:
-            sign_in(hold_email, hold_password)
+            sign_in(_polished["app_uid"], hold_email, hold_password)
             print("sign in success")
             # if sign in is successful, redirect to app, else show error message
         except Exception as e:
