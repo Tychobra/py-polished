@@ -1,6 +1,7 @@
 from shiny import App, render, ui
 from polished import polished_config, secure_ui, secure_server
 import yaml
+import os
 
 app_config = None
 with open("config.yml", "r") as stream:
@@ -29,5 +30,5 @@ def app_server(input, output, session):
 ui = secure_ui(app_ui)
 
 server = secure_server(app_server)
-
-app = App(ui, server)
+wd = os.getcwd()
+app = App(ui, server, static_assets=wd + "/www")

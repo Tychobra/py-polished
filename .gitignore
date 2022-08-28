@@ -3,3 +3,6 @@ config.yml
 
 __pycache__
 polished.egg-info
+
+build/
+dist/

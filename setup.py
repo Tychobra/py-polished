@@ -3,11 +3,12 @@ from setuptools import setup
 setup(
     name='polished',
     version='0.1',
-    description='The funniest joke in the world',
+    description='Authentication and User Management for py-shiny',
     url='http://github.com/storborg/funniest',
-    author='Flying Circus',
-    author_email='flyingcircus@example.com',
+    author='Andy Merlino',
+    author_email='andy.merlino@tychobra.com',
     license='MIT',
     packages=['polished'],
-    zip_safe=False
+    zip_safe=False,
+    exclude_package_data = {'': ['.gitignore', 'examples/*']}
 )
