@@ -15,4 +15,4 @@ def sign_in(app_uid, email, password, hashed_cookie, api_key = _polished["api_ke
         auth = (api_key, "")
     )
 
-    return res.json()
+    return res

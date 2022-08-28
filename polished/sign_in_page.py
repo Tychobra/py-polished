@@ -39,28 +39,31 @@ def sign_in_server(input, output, session):
     def _():
         hold = input.check_jwt()
         
-        breakpoint()
         try:
-
-            hashed_cookie = hashlib.md5(hold["cookie"].encode('utf-8'))
-            hashed_cookie = hashed_cookie.digest()
             
-            user = sign_in(
+            hashed_cookie = hashlib.md5(hold["cookie"].encode('utf-8'))
+            hashed_cookie = hashed_cookie.hexdigest()
+            
+            print(hashed_cookie)
+
+            sign_in_res = sign_in(
                 app_uid = _polished["app_uid"], 
                 email = hold['email'], 
                 password = hold['password'],
-                hashed_cookie = hashed_cookie
+                hashed_cookie = hashed_cookie,
+                api_key = _polished["api_key"]
             )
             
-            
 
-            #if (user['error']) {
-            #  
-            #}
-            print("sign in success")
-            print(user)
+            if (sign_in_res.status_code == 200):
+                print("sign in success")
+                # update the url
+                session.reload()
+            else:
+                print("sign in error")
+                print(sign_in_res.json())    
+             
             
-            # if sign in is successful, redirect to app, else show error message
         except Exception as e:
-            print("sign in error")
+            print("sign in error catch")
             print(e)
