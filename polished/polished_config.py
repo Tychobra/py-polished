@@ -17,8 +17,8 @@ def polished_config(app_name, api_key):
     )
 
     app_out = res.json()
-    
-    _polished["app_name"] = app_out["app_name"]
-    _polished["app_uid"] = app_out["uid"]
+
+    _polished["app_name"] = app_out["app_name"][0]
+    _polished["app_uid"] = app_out["uid"][0]
     _polished["api_key"] = api_key
 
