@@ -2,11 +2,13 @@
 
 Warning: this package is in early development.  Don't use for production apps.
 
-Install the package loacally
+### Install the package locally
 
 ```terminal
 python3 -m pip install -e "."
 ```
+
+### Run the example shiny app
 
 ```terminal
 cd examples/minimal
