@@ -3,8 +3,8 @@ from shiny import *
 
 from ._polished import _polished
 from .sign_in import sign_in
+from .shiny_reload import shiny_reload
 
-my_hash = hashlib.md5()
 
 def sign_in_ui():
     
@@ -36,15 +36,13 @@ def sign_in_server(input, output, session):
     
     @reactive.Effect
     @reactive.event(input.check_jwt)
-    def _():
+    async def _():
         hold = input.check_jwt()
         
         try:
             
             hashed_cookie = hashlib.md5(hold["cookie"].encode('utf-8'))
             hashed_cookie = hashed_cookie.hexdigest()
-            
-            print(hashed_cookie)
 
             sign_in_res = sign_in(
                 app_uid = _polished["app_uid"], 
@@ -58,7 +56,8 @@ def sign_in_server(input, output, session):
             if (sign_in_res.status_code == 200):
                 print("sign in success")
                 # update the url
-                session.reload()
+
+                await shiny_reload(session)
             else:
                 print("sign in error")
                 print(sign_in_res.json())    

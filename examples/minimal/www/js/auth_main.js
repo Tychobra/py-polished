@@ -82,4 +82,13 @@ const auth_main = (ns_prefix) => {
 
   })
 
+
+  Shiny.addCustomMessageHandler(
+    "shiny_reload",
+    function(message) {
+      debugger
+      location.reload()
+    }
+  )
+
 }
