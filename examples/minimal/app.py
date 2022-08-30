@@ -1,5 +1,5 @@
-from shiny import App, render, ui
-from polished import polished_config, secure_ui, secure_server
+from shiny import App, render, ui, reactive
+from polished import polished_config, secure_ui, secure_server, sign_out
 import yaml
 import os
 
@@ -13,14 +13,31 @@ polished_config(
 )
 
 app_ui = ui.page_fluid(
-    ui.h2("Hello Shiny!"),
+    ui.row(
+      ui.column(
+        6,
+        ui.h2("Hello Shiny!")
+      ),
+      ui.column(
+        6,
+        ui.input_action_button(
+            "sign_out",
+            "Sign Out"
+        )
+      )
+    ),
     ui.input_slider("n", "N", 0, 100, 20),
-    ui.output_text_verbatim("txt")
+    ui.output_text_verbatim("txt"),
+    ui.tags.script(src="js/auth_main.js"),
+    ui.tags.script("auth_main('')")
 )
 
 def app_server(input, output, session):
     
-    print(session)
+    @reactive.Effect
+    @reactive.event(input.sign_out)
+    async def _():
+        await sign_out(session)
         
     @output
     @render.text

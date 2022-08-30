@@ -16,24 +16,27 @@ def secure_server(server):
             hold_cookie = input.hashed_cookie()
 
             print(f"server cookie: {hold_cookie}")
-            
-            try:
-                polished_user = get_sessions(
-                    app_uid = _polished["app_uid"], 
-                    hashed_cookie = hold_cookie, 
-                    api_key = _polished["api_key"]
-                )
-            except Exception as err:
-                print("server - error getting session")
-                print(err)
-            
-            print(f"server polished_user: {polished_user}")
 
-            if (polished_user == None):
+            if hold_cookie == "":   
                 sign_in_server(input, output, session)
             else:
-                server(input, output, server)
-        
+                
+                try:
+                    polished_user = get_sessions(
+                        app_uid = _polished["app_uid"], 
+                        hashed_cookie = hold_cookie, 
+                        api_key = _polished["api_key"]
+                    )
+                    
+                except Exception as err:
+                    print("server - error getting session")
+                    print(err)
+            
+                print(f"server polished_user: {polished_user}")
+
+                if (polished_user == None):
+                    sign_in_server(input, output, session)
+                else:
+                    server(input, output, session)
 
     return fun_out
-    

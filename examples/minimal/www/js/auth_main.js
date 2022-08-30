@@ -86,7 +86,13 @@ const auth_main = (ns_prefix) => {
   Shiny.addCustomMessageHandler(
     "shiny_reload",
     function(message) {
+      
       debugger
+      if (message.page === "sign_in") {
+        // user is signing out, so return to sign in page
+        document.cookie = "polished=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      }
+
       location.reload()
     }
   )

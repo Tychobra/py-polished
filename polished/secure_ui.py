@@ -15,7 +15,8 @@ def secure_ui(ui):
         hold_cookie = request.cookies.get("polished")
         query_page = request.query_params.get("page", None)
         hashed_cookie = ""
-        if (hold_cookie != None):
+        print(f"hold_cookie: {hold_cookie}")
+        if (hold_cookie != None or hold_cookie == ""):
             hashed_cookie = hashlib.md5(hold_cookie.encode('utf-8'))
             hashed_cookie = hashed_cookie.hexdigest()
             
