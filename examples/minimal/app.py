@@ -1,7 +1,8 @@
+from imp import PKG_DIRECTORY
 from shiny import App, render, ui, reactive
-from polished import polished_config, secure_ui, secure_server, sign_out
+from polished import polished_config, secure_ui, secure_server, sign_out, static_path 
 import yaml
-import os
+
 
 app_config = None
 with open("config.yml", "r") as stream:
@@ -28,7 +29,7 @@ app_ui = ui.page_fluid(
     ),
     ui.input_slider("n", "N", 0, 100, 20),
     ui.output_text_verbatim("txt"),
-    ui.tags.script(src="js/auth_main.js"),
+    ui.tags.script(src="polished/js/auth_main.js"),
     ui.tags.script("auth_main('')")
 )
 
@@ -47,5 +48,5 @@ def app_server(input, output, session):
 ui = secure_ui(app_ui)
 
 server = secure_server(app_server)
-wd = os.getcwd()
-app = App(ui, server, static_assets=wd + "/www")
+
+app = App(ui, server, static_assets=polished_static)

@@ -26,7 +26,7 @@ def sign_in_ui():
         ),
         # TODO: the cookie when the sign in is attempted
         ui.tags.script(src = "https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"),
-        ui.tags.script(src = "js/auth_main.js"),
+        ui.tags.script(src = "polished/js/auth_main.js"),
         ui.tags.script("auth_main('')")
     )
 
