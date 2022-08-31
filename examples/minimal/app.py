@@ -49,4 +49,4 @@ ui = secure_ui(app_ui)
 
 server = secure_server(app_server)
 
-app = App(ui, server, static_assets=polished_static)
+app = App(ui, server, static_assets=static_path)
