@@ -1,5 +1,6 @@
 import requests
 from ._polished import _polished
+from .api_00 import api_res
 
 def get_sessions(app_uid, hashed_cookie, api_key = _polished["api_key"]):
        
@@ -13,9 +14,9 @@ def get_sessions(app_uid, hashed_cookie, api_key = _polished["api_key"]):
     )
 
     
-    out = res.json()
+    out = api_res(res)
 
-    if len(out) == 0:
-        out = None 
+    #if len(out) == 0:
+    #    out = None 
     
     return out

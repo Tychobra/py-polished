@@ -26,6 +26,12 @@ def secure_ui(ui):
                     hashed_cookie = hashed_cookie, 
                     api_key = _polished["api_key"]
                 )
+
+                polished_user = polished_user["content"]
+                    
+                if len(polished_user) == 0:
+                    polished_user = None 
+
             except Exception as err:
                 print("ui - error getting session")
                 print(err)

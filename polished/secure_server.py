@@ -28,6 +28,11 @@ def secure_server(server):
                         api_key = _polished["api_key"]
                     )
 
+                    polished_user = polished_user["content"]
+                    
+                    if len(polished_user) == 0:
+                        polished_user = None 
+
                 except Exception as err:
                     print("server - error getting session")
                     print(err)
